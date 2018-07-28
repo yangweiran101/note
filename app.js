@@ -3,7 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var index = require('./controller/index')
+var index = require('./controller/index');
+
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
@@ -20,8 +23,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+    secret: 'ywr',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+    store: new MongoStore({
+        url: 'mongodb://localhost/note',
+        ttl: 14 * 24 * 60 * 60
+    })
+}))
+app.use('/',index);
 
-app.use('/',index)
+
 
 
 // catch 404 and forward to error handler

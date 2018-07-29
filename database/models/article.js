@@ -2,9 +2,11 @@ var mongoose = require('mongoose');
 
 
 var article = new mongoose.Schema({
-    id:{
-        type:Number,
-        unique:true
+    username:{
+        type:String,
+    },
+    userpic:{
+        type:String
     },
     pic:{
         type:String
@@ -15,6 +17,10 @@ var article = new mongoose.Schema({
     content:{
         type:String
     },
+    id: {
+        type: Number,
+        unique:true
+    }
 });
 
 module.exports = mongoose.model('article',article)

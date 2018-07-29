@@ -4,9 +4,9 @@ const users = require('../database/models/users');
 const isEmail = require( 'validator/lib/isEmail');
 
 router.post('/note',(req,res) =>{
-    let {username,email,password}=req.body;
+    let {username,email,password,headpic}=req.body;
     if(isEmail(email)&&email&&password&&password.trim()!= ''&&username&&username.trim()!=''&&username != password){
-        users.create({username,email,password}).then(data => {
+        users.create({username,email,password,headpic}).then(data => {
             res.json({
                 code:200,
                 msg:'注册成功'

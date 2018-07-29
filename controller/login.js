@@ -11,7 +11,8 @@ router.post('/login',(req,res) => {
                 req.session.users = data;
                 let usermsg ={
                     username:data.username,
-                    email:data.email
+                    email:data.email,
+                    headpic:data.headpic
                 }
                 res.json({
                     code:200,

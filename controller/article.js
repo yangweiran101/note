@@ -10,6 +10,11 @@ router.post('/addArticle',(req,res) =>{
                 code:200,
                 msg:'文章添加成功'
             })
+        }).catch(err =>{
+            res.json({
+                code:401,
+                msg:'id重复，提交失败'
+            })
         })
     }else{
         res.json({
@@ -19,6 +24,21 @@ router.post('/addArticle',(req,res) =>{
     }
 
 })
+
+
+router.post('/getArticleDetail',(req,res) =>{
+    let {id} = req.body
+    article.find({id}).then(data => {
+        console.log(data);
+        res.json({
+            code:200,
+            data,
+            msg:'获取文章详情成功！'
+        })
+    })
+});
+
+
 router.get('/getArticle',(req,res) =>{
     article.find().then(data => {
         res.json({

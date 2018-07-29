@@ -10,6 +10,9 @@ var users = new mongoose.Schema({
     password:{
         type:String
     } ,
+    headpic:{
+        type:String
+    }
 });
 
 module.exports = mongoose.model('users',users,"users")

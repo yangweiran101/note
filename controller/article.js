@@ -3,15 +3,15 @@ const router = express.Router();
 const article = require('../database/models/article');
 
 router.post('/addArticle',(req,res) =>{
-    let {username,userpic,pic,title,content,id} = req.body;
-    if(username&&userpic&&title&&content&&id){
+    let {username,userpic,pic,title,content} = req.body;
+    if(username&&userpic&&title&&content){
         article.create({
             username,
             userpic,
             pic,
             title,
             content,
-            id
+            // id
         }).then(data =>{
             res.json({
                 code:200,
@@ -30,8 +30,7 @@ router.post('/addArticle',(req,res) =>{
         })
     }
 
-})
-
+});
 
 router.post('/getArticleDetail',(req,res) =>{
     let {_id} = req.body
@@ -45,7 +44,6 @@ router.post('/getArticleDetail',(req,res) =>{
     })
 });
 
-
 router.get('/getArticle',(req,res) =>{
     article.find().then(data => {
         res.json({
@@ -53,6 +51,21 @@ router.get('/getArticle',(req,res) =>{
             data,
             msg:'获取文章成功！'
         })
+    })
+});
+
+router.get('/getSezrch',(req,res) =>{
+    let keyword = req.query
+    let reg = new RegExp(`${keyword}`)
+    console.log(reg);
+    article.find({title:reg}).then(data =>{
+        res.json({
+            code:200,
+            data,
+            msg:'获取文章成功'
+        })
+
+
     })
 })
 module.exports = router;

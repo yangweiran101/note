@@ -5,6 +5,9 @@ var comment = new mongoose.Schema({
     username:{
         type:String,
     },
+    userpic:{
+        type:String
+    },
     content:{
         type:String
     },

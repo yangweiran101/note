@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const comment = require('../database/models/comment');
-//5b5e7412475a5d45447ed2a6
+
 router.post('/addComment',(req,res) => {
-    let {username,content,article} = req.body;
+    let {username,userpic,content,article} = req.body;
     comment.create({
         username,
+        userpic,
         content,
         article
     }).then(data =>{
+        console.log(data);
         res.json({
             code:200,
             data,

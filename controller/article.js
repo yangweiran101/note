@@ -54,11 +54,11 @@ router.get('/getArticle',(req,res) =>{
     })
 });
 
-router.get('/getSezrch',(req,res) =>{
-    let keyword = req.query
+router.get('/getSearch',(req,res) =>{
+    let keyword = req.query.keyword;
     let reg = new RegExp(`${keyword}`)
-    console.log(reg);
     article.find({title:reg}).then(data =>{
+        console.log(data);
         res.json({
             code:200,
             data,
